@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ingreso-egreso-app-7fad7": {
+      "hosting": {
+        "inoutapp": [
+          "ingreso-egreso-app-7fad7"
+        ]
+      }
+    }
+  }
+}

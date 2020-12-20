@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -121,8 +122,16 @@
               "devServerTarget": "inoutapp:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "inoutapp"
+    }
+  },
+  "defaultProject": "inoutapp",
+  "cli": {
+    "analytics": "1756224f-20f5-4ffd-a79a-d6d0fb2eb65c"
+  }
 }
