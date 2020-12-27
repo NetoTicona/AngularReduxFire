@@ -14,11 +14,17 @@ import {
   DesactivarLoadingAction,
 } from '../shared/userInterf.actions';
 import { Store } from '@ngrx/store';
+import { SetUserAction } from './auth.actions';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuchService {
+
+  private userSubscription:Subscription;
+
+
   constructor(
     public _sAuth: AngularFireAuth,
     public _afDB: AngularFirestore,
@@ -105,6 +111,30 @@ export class AuchService {
     this._sAuth.authState.subscribe((fbUser) => {
       // este un usuuario generico de firebase
       console.log('firebaseUseserr:::', fbUser);
+
+      if( fbUser ){
+        this.userSubscription =  this._afDB.doc(`${ fbUser.uid }/usuario`).valueChanges(  ).subscribe( (u:any )=>{
+          
+          console.log('usuaro de fireBAse: ' , u);
+          const newUser = new User( u  )
+          
+          console.log('el newUser: ', newUser );
+          //----------ngrx---------//
+          this.sstore.dispatch( new SetUserAction( newUser ) );
+          
+
+        } )
+      }else{
+
+        //se desautentico
+        this.userSubscription.unsubscribe();
+
+
+      }
+
+
+
+
     });
   }
 
