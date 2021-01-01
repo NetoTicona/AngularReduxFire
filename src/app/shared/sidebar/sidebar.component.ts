@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuchService } from 'src/app/auth/auch.service';
+import { IngreEgreService } from 'src/app/ingreso-egreso/ingre-egre.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,8 @@ import { AuchService } from 'src/app/auth/auch.service';
 export class SidebarComponent implements OnInit {
 
   constructor(
-    private _sAuthService:AuchService
+    private _sAuthService:AuchService,
+    private _inputService:IngreEgreService
 
   ) { }
 
@@ -21,6 +23,7 @@ export class SidebarComponent implements OnInit {
   logout() {
 
     this._sAuthService.logout();
+    this._inputService.cancelarSubscriptions();
   }
 
 }

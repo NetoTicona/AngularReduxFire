@@ -12,7 +12,7 @@ import { IngresoEgresoComponent } from './ingreso-egreso/ingreso-egreso.componen
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -20,6 +20,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { StoreModule } from '@ngrx/store';
 import { aPPPREducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { OrdencitoPipe } from './ingreso-egreso/ordencito.pipe';
+
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
+    OrdencitoPipe,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-
+    ChartsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot( aPPPREducers ),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

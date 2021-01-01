@@ -14,16 +14,16 @@ import {
   DesactivarLoadingAction,
 } from '../shared/userInterf.actions';
 import { Store } from '@ngrx/store';
-import { SetUserAction } from './auth.actions';
+import { SetUserAction, UnserUserAction } from './auth.actions';
 import { Subscription } from 'rxjs';
+import { UnsetItemsActionn } from '../ingreso-egreso/inout.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuchService {
-
-  private userSubscription:Subscription;
-
+  private userSubscription: Subscription = new Subscription;
+  private usuario : User;
 
   constructor(
     public _sAuth: AngularFireAuth,
@@ -104,37 +104,34 @@ export class AuchService {
   logout() {
     this.router.navigate(['/login']);
     this._sAuth.signOut();
+
+
+    this.sstore.dispatch( new UnserUserAction() )
+
+
   }
 
   initAuchService() {
     //sollo se debe ejecutar una vez
     this._sAuth.authState.subscribe((fbUser) => {
       // este un usuuario generico de firebase
-      console.log('firebaseUseserr:::', fbUser);
 
-      if( fbUser ){
-        this.userSubscription =  this._afDB.doc(`${ fbUser.uid }/usuario`).valueChanges(  ).subscribe( (u:any )=>{
-          
-          console.log('usuaro de fireBAse: ' , u);
-          const newUser = new User( u  )
-          
-          console.log('el newUser: ', newUser );
-          //----------ngrx---------//
-          this.sstore.dispatch( new SetUserAction( newUser ) );
-          
-
-        } )
-      }else{
-
+      if (fbUser) {
+        this.userSubscription = this._afDB
+          .doc(`${fbUser.uid}/usuario`)
+          .valueChanges()
+          .subscribe((u: any) => {
+            const newUser = new User(u);
+            this.usuario = newUser;
+            //----------ngrx---------//
+            //---seteando neuvo usuario alstate//
+            this.sstore.dispatch(new SetUserAction(newUser));
+          });
+      } else {
         //se desautentico
         this.userSubscription.unsubscribe();
-
-
+        this.usuario = null;
       }
-
-
-
-
     });
   }
 
@@ -149,4 +146,18 @@ export class AuchService {
       })
     );
   }
+
+
+
+
+
+  getUsuario(){
+    return { ...this.usuario }
+  }
+
+
+
+
+
+
 }

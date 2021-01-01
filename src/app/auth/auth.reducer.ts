@@ -21,6 +21,11 @@ export function authReducer( state=estadoAuthInicial  , action:frommAuchh.accion
                     ... action.userr
                 }
              }
+
+        case frommAuchh.UNSET_USER:
+            return{
+                user:null
+            }     
         default:
             return state     
     }
