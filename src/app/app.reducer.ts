@@ -9,7 +9,7 @@ import * as fromIngresoEgresoReducer from "./ingreso-egreso/inout.reducer";
 export interface EstadoCompletoAplicaion {
     ui: fromUIR.StateUserInterf;
     auth:fromAuth.EstadoAuthenticacion;
-    inout:fromIngresoEgresoReducer.IngresoEgresoEstadito
+    //inout:fromIngresoEgresoReducer.IngresoEgresoEstadito
 }
 
 
@@ -18,7 +18,7 @@ export interface EstadoCompletoAplicaion {
 export const aPPPREducers: ActionReducerMap<EstadoCompletoAplicaion>={
     ui: fromUIR.uIntReducer,
     auth:fromAuth.authReducer,
-    inout:fromIngresoEgresoReducer.ingresoEgresoReducer
+    //inout:fromIngresoEgresoReducer.ingresoEgresoReducer
 }
 
 

@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { EstadoCompletoAplicaion } from 'src/app/app.reducer';
 import { ChartType } from 'chart.js';
+import * as IngreEgreStateReducer from "../inout.reducer"
 
 @Component({
   selector: 'app-estadistica',
@@ -25,11 +26,11 @@ export class EstadisticaComponent implements OnInit {
 
 
   constructor(
-    private store:Store<EstadoCompletoAplicaion>
+    private store:Store< IngreEgreStateReducer.InouTState >
   ) { }
 
   ngOnInit(): void {
-    this.laSuscrbida = this.store.select('inout').subscribe( (r)=>{
+    this.laSuscrbida = this.store.select('ingaEnge').subscribe( (r)=>{
       this.conteoInouts( r.items )
 
       console.log('r.items: ',r.items );

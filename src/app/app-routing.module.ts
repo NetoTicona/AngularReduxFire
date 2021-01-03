@@ -10,11 +10,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
-      path: '',
-      component: DashboardComponent,
-      children: dashboardRoutes,
-      canActivate:[AuthGuardiaService] //array de conbdiciones
-  },
+    path:'',
+    loadChildren:"./ingreso-egreso/ingreso-egreso.module#IngresoEgresoModule",
+    canLoad:[ AuthGuardiaService ]
+   },
+
   { path: '**', redirectTo: '' }
 ];
 

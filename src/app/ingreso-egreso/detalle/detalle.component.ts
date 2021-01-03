@@ -6,6 +6,7 @@ import { IngresoEgresoComponent } from '../ingreso-egreso.component';
 import Swal from 'sweetalert2';
 import { IngreEgreService } from '../ingre-egre.service';
 import { Subscription } from 'rxjs';
+import * as IngreEgreStateReducer from "../inout.reducer"
 
 @Component({
   selector: 'app-detalle',
@@ -17,12 +18,12 @@ export class DetalleComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
 
   constructor(
-    private store:Store<EstadoCompletoAplicaion>,
+    private store:Store<IngreEgreStateReducer.InouTState>,
     public ingesoEgresoService:IngreEgreService
   ) { }
 
   ngOnInit(): void {
-   this.subscription = this.store.select('inout').subscribe( (inout:any)=>{
+   this.subscription = this.store.select('ingaEnge').subscribe( (inout:any)=>{
       console.log('objeto inpout del storage',inout);
       this.items = inout.items
     } )

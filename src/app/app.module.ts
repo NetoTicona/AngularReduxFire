@@ -23,29 +23,25 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { OrdencitoPipe } from './ingreso-egreso/ordencito.pipe';
 
 import { ChartsModule } from 'ng2-charts';
+import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
+import { IngresoEgresoModule } from './ingreso-egreso/ingreso-egreso.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    DetalleComponent,
-    EstadisticaComponent,
-    IngresoEgresoComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    OrdencitoPipe,
+
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    AuthModule,
+  
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    ChartsModule,
-    ReactiveFormsModule,
+    
+    
     StoreModule.forRoot( aPPPREducers ),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
